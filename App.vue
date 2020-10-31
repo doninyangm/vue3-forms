@@ -1,29 +1,29 @@
 <template>
-    <div>
-        {{ username }}
-        <my-input
-            name="Username"
-            :rules="{ required: true, min: 5}"
-            type="text"
-            :value="username.value"
-            @update="update"
-        />
+    <form @submit.prevent="submit" class="form">
+        <div>
+            <my-input
+                name="Username"
+                :rules="{ required: true, min: 5}"
+                type="text"
+                :value="username.value"
+                @update="update"
+            />
 
-        {{ password }}
-        <my-input
-            name="Password"
-            :rules="{ required: true, min: 10}"
-            type="password"
-            :value="password.value"
-            @update="update"
-        />
-        
-        <my-button 
-            color="white"
-            background="darkslateblue"
-            :disabled="!valid"
-        />
-    </div>
+            <my-input
+                name="Password"
+                :rules="{ required: true, min: 10}"
+                type="password"
+                :value="password.value"
+                @update="update"
+            />
+            
+            <my-button 
+                color="white"
+                background="darkslateblue"
+                :disabled="!valid"
+            />
+        </div>
+    </form>
 </template>
 
 <script>
@@ -53,6 +53,9 @@ export default{
         }
     },
     methods: {
+        submit($evt){
+            console.log('Submitted');
+        },
         update(payload){
             this[payload.name.toLowerCase()] = {
                 value: payload.value,
@@ -66,5 +69,9 @@ export default{
 <style>
 body{
     font-family: Arial, Helvetica, sans-serif;
+}
+.form{
+    max-width: 400px;
+    width: 50%;
 }
 </style>
