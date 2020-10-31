@@ -37,7 +37,6 @@ export default{
     },
     data(){
         return {
-            valid: true,
             username: {
                 value: '',
                 valid: false
@@ -48,10 +47,17 @@ export default{
             }
         }
     },
+    computed:{
+        valid(){
+            return this.username.valid && this.password.valid
+        }
+    },
     methods: {
         update(payload){
-            console.log(payload);
-            this[payload.name.toLowerCase()].value = payload.value
+            this[payload.name.toLowerCase()] = {
+                value: payload.value,
+                valid: payload.valid
+            }
         }
     }
 } 
